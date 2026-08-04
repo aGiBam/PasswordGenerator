@@ -12,22 +12,22 @@
 </div>
 <div>
   <label for="letters">Use Letters</label>
-  <input type="checkbox" name="latters" id="letters">
+  <input type="checkbox" name="latters" id="letters" (change)="onChangeUseLetters()">
 </div>
 <div>
   <label for="symbols">Use Symbols</label>
-  <input type="checkbox" name="symbols" id="symbols">
+  <input type="checkbox" name="symbols" id="symbols" (change)="onChangeUseSymbols()">
 </div>
 <div>
   <label for="numbers">Use Numbers</label>
-  <input type="checkbox" name="numbers" id="numbers">
+  <input type="checkbox" name="numbers" id="numbers" (change)="onChangeUseNumbers()">
 </div>
 <div>
   <button type="submit" (click)="onButtonClick()">Generate !</button>
 </div>
 <div>
   <label for="password">Your Password</label>
-  <input type="password" id="password">
+  <input type="text" id="password" [value]="password">
 </div>
 </body>
 </html>
