@@ -40,11 +40,12 @@
         " (click)="onButtonClick()" class="button is-link is-fullwidth">
         Generate!
       </button>
-
-      <div class="box">
+      @if(password){
+      <div class="box" >
         <label>Your Password</label>
         <input class="input" [value]="password" />
       </div>
+      }
     </div>
   </div>
 </div>
