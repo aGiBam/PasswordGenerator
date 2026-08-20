@@ -1,34 +1,52 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Password Generator</title>
-</head>
-<body>
-<h1>Password Generator</h1>
-<div>
-  <label>Length</label>
-  <input type="text">
+<div class="container">
+  <div class="columns is-centered">
+    <div class="box column is-one-third">
+      <h1 class="title has-text-centered">Password Generator</h1>
+
+      <div class="field">
+        <label>Length</label>
+        <input class="input" (input)="onChangeLength($event.target.value)" />
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseLetters()" type="checkbox" />
+            Use Letters
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseNumbers()" type="checkbox" />
+            Use Numbers
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseSymbols()" type="checkbox" />
+            Use Symbols
+          </label>
+        </div>
+      </div>
+
+      <button
+        [disabled]="!(length > 0 && (includeLetters() || includeSymbols() || includeNumbers()))"
+        (click)="onButtonClick()"
+        class="button is-link is-fullwidth">
+        Generate!
+      </button>
+      @if(password){
+      <div class="box" >
+        <label>Your Password</label>
+        <input class="input" [value]="password" />
+      </div>
+      }
+    </div>
+  </div>
 </div>
-<div>
-  <label for="letters">Use Letters</label>
-  <input type="checkbox" name="letters" id="letters" (change)="onChangeUseLetters()">
-</div>
-<div>
-  <label for="symbols">Use Symbols</label>
-  <input type="checkbox" name="symbols" id="symbols" (change)="onChangeUseSymbols()">
-</div>
-<div>
-  <label for="numbers">Use Numbers</label>
-  <input type="checkbox" name="numbers" id="numbers" (change)="onChangeUseNumbers()">
-</div>
-<div>
-  <button type="submit" (click)="onButtonClick()">Generate !</button>
-</div>
-<div>
-  <label for="password">Your Password</label>
-  <input type="text" id="password" [value]="password">
-</div>
-{{password}}
-</body>
-</html>

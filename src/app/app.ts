@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  length = 0;
   password = "";
   includeNumbers = signal(false);
   includeSymbols = signal(false);
@@ -27,9 +27,35 @@ export class App {
     this.includeLetters.set(!this.includeLetters());
   }
 onButtonClick(){
-  console.log(this.includeNumbers(),'numbers');
-  console.log(this.includeSymbols(),'symbols');
-  console.log(this.includeLetters(),'letters');
-  this.password = "My Assword !!!";
-}
+  const numbers = '1234567890'
+  const symbols = '!@#$%^&*()_+-=[]{}|;:\'",.<>/?'
+  const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let validChars = ''
+  if(this.includeNumbers()){
+    validChars += numbers
+  }
+  if(this.includeSymbols()){
+    validChars += symbols
+  }
+  if(this.includeLetters()){
+    validChars += letters
+  }
+  if (!validChars) {
+    this.password = ''
+    return
+  }
+
+  let generatedPassword = '';
+  for (let i = 0; i < this.length; i++) {
+    const index = crypto.getRandomValues(new Uint32Array(1))[0] % validChars.length
+    generatedPassword += validChars.charAt(index)
+  }
+  this.password = generatedPassword
+  }
+onChangeLength(value: string){
+ const parsedValue = parseInt(value);
+ if(!isNaN(parsedValue)){
+  this.length = parsedValue;
+    }
+  }
 }
