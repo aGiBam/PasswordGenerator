@@ -40,10 +40,15 @@ onButtonClick(){
   if(this.includeLetters()){
     validChars += letters
   }
+  if (!validChars) {
+    this.password = ''
+    return
+  }
+
   let generatedPassword = '';
-  for(let i = 0; i < this.length; i++){
-    const index = Math.floor(Math.random() * validChars.length)
-    generatedPassword += validChars[index]
+  for (let i = 0; i < this.length; i++) {
+    const index = crypto.getRandomValues(new Uint32Array(1))[0] % validChars.length
+    generatedPassword += validChars.charAt(index)
   }
   this.password = generatedPassword
   }
